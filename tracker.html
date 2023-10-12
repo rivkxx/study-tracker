@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Tracker</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1DB954;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            background-color: #121212;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .counter {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            font-size: 24px;
+            margin: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #1DB954;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .button-dark {
+            background-color: #222;
+        }
+
+        .todo-list,
+        .completed-tasks {
+            margin-top: 20px;
+        }
+
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .task-item button {
+            background-color: #222;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .task-item.completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Study Tracker</h1>
+        <div class="counter">Hours Studied: <span id="hours">0</span></div>
+        <button class="button" onclick="increaseHours(1)">+1 Hour</button>
+        <button class="button" onclick="increaseHours(2)">+2 Hours</button>
+
+        <div class="todo-list">
+            <h2>To-Do List</h2>
+            <input type="text" id="task" placeholder="Enter a task">
+            <button class="button" onclick="addTask()">Add Task</button>
+            <ul id="taskList"></ul>
+        </div>
+
+        <div class="completed-tasks">
+            <h2>Completed Tasks</h2>
+            <ul id="completedTaskList"></ul>
+        </div>
+
+        <div id="dateTime"></div>
+    </div>
+
+    <script>
+        function increaseHours(hours) {
+            var currentHours = parseInt(document.getElementById('hours').textContent);
+            document.getElementById('hours').textContent = currentHours + hours;
+        }
+
+        function addTask() {
+            var task = document.getElementById('task').value;
+            if (task.trim() === '') {
+                alert('Task description cannot be empty!');
+                return;
+            }
+
+            var taskList = document.getElementById('taskList');
+            var taskItem = document.createElement('li');
+            taskItem.className = 'task-item';
+            taskItem.innerHTML = task + '<button onclick="completeTask(this)">Complete</button>';
+            taskList.appendChild(taskItem);
+
+            document.getElementById('task').value = '';
+        }
+
+        function completeTask(button) {
+            var taskItem = button.parentNode;
+            taskItem.classList.toggle('completed');
+
+            if (taskItem.classList.contains('completed')) {
+                var completedTaskList = document.getElementById('completedTaskList');
+                completedTaskList.appendChild(taskItem.cloneNode(true));
+                taskItem.remove();
+            } else {
+                var taskList = document.getElementById('taskList');
+                taskList.appendChild(taskItem.cloneNode(true));
+                taskItem.remove();
+            }
+        }
+
+        function updateDateTime() {
+            var now = new Date();
+            var dateTimeElement = document.getElementById('dateTime');
+            var date = now.toLocaleDateString();
+            var time = now.toLocaleTimeString();
+            dateTimeElement.textContent = `Date: ${date} | Time: ${time}`;
+        }
+
+        // Update date and time every second
+        setInterval(updateDateTime, 1000);
+
+        // Initial date and time display
+        updateDateTime();
+    </script>
+</body>
+
+</html>
