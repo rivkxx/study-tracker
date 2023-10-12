@@ -1,5 +1,8 @@
 # Study Tracker App
 
+<img width="956" alt="image" src="https://github.com/rivkxx/study-tracker/assets/81345344/a7ee0b45-af1f-4d76-8285-641329c3bc74">
+
+
 Study Tracker is a simple web application designed to help you track your study hours and manage your tasks effectively. The app allows you to add tasks, mark them as completed, and track the hours you've studied. Completed tasks are moved to a separate section for easy reference.
 
 ## Features
