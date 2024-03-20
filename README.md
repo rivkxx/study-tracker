@@ -27,3 +27,6 @@ Study Tracker is a simple web application designed to help you track your study 
 
 4. **View Date and Time:**
    - The current date and time are displayed in the app. It updates in real-time.
+
+5. **Learn how to study efficiently with this**
+     - Customise the HTML file to fit into your own colour of choice.
